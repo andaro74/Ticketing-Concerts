@@ -1,10 +1,10 @@
 {
-  "name": "hello_world",
+  "name": "ticketing",
   "version": "1.0.0",
-  "description": "hello world sample for NodeJS",
+  "description": "Ticketing application to showcase a concert ticketing service.",
   "main": "app.js",
   "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
-  "author": "SAM CLI",
+  "author": "Hector Flores",
   "license": "MIT",
   "scripts": {
     "unit": "jest",
@@ -12,16 +12,14 @@
     "compile": "tsc",
     "test": "npm run compile && npm run unit"
   },
-  "dependencies": {
-    "esbuild": "^0.14.14"
-  },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.92",
-    "@types/jest": "^29.2.0",
     "@jest/globals": "^29.2.0",
-    "@types/node": "^20.5.7",
+    "@types/aws-lambda": "^8.10.152",
+    "@types/jest": "^29.2.0",
+    "@types/node": "^20.19.12",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
+    "esbuild": "^0.25.9",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -29,6 +27,6 @@
     "prettier": "^2.5.1",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   }
 }
