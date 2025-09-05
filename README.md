@@ -7,3 +7,6 @@ REST API Concert Ticketing Microservices Application in AWS to show a distribute
 - aws sam
 - npm install -g esbuild
 
+#### References
+
+- [Building Node.js Lambda functions with esbuild in AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build-typescript.html)
