@@ -10,20 +10,6 @@ import { connect } from 'http2';
  *
  * Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
  * @returns {Object} object - API Gateway Lambda Proxy Output Format
- *
- * export interface TicketResponse {
-     ticketId: UUID;
-     concert: String;
-     concertDate: Date;
-     seatNumber: String;
-     rowNumber:String;
-     venueName:String;
-     customerName:String;
-     price:Number;
-     receipt:String;
-     transactionDate:Date;
- }
- * 
  */
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
