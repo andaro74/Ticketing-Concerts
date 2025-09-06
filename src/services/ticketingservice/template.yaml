@@ -11,7 +11,7 @@ Globals:
     Timeout: 3
 
 Resources:
-  TicketsFunction:
+  GetTicketsFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: src/
@@ -43,7 +43,7 @@ Outputs:
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/tickets/"
   TicketsFunction:
     Description: "Tickets Lambda Function ARN"
-    Value: !GetAtt TicketsFunction.Arn
+    Value: !GetAtt GetTicketsFunction.Arn
   TicketsFunctionIamRole:
     Description: "Implicit IAM Role created for Tickets function"
-    Value: !GetAtt TicketsFunctionRole.Arn
+    Value: !GetAtt GetTicketsFunctionRole.Arn
