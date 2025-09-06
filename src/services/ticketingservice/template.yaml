@@ -33,6 +33,93 @@ Resources:
         Sourcemap: true
         EntryPoints: 
         - handlers/getTickets.ts
+  CreateTicketsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: handlers/createTickets.handler
+      Runtime: nodejs22.x
+      Architectures:
+        - x86_64
+      Events:
+        ApiEvent:
+          Type: Api 
+          Properties:
+            Path: /tickets
+            Method: post
+    Metadata: # Manage esbuild properties
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints: 
+        - handlers/createTickets.ts
+  UpdateTicketsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: handlers/updateTickets.handler
+      Runtime: nodejs22.x
+      Architectures:
+        - x86_64
+      Events:
+        ApiEvent:
+          Type: Api 
+          Properties:
+            Path: /tickets/{ticketId}
+            Method: put
+    Metadata: # Manage esbuild properties
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints: 
+        - handlers/updateTickets.ts        
+  DeleteTicketsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: handlers/deleteTickets.handler
+      Runtime: nodejs22.x
+      Architectures:
+        - x86_64
+      Events:
+        ApiEvent:
+          Type: Api 
+          Properties:
+            Path: /tickets/{ticketId}
+            Method: delete
+    Metadata: # Manage esbuild properties
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints: 
+        - handlers/deleteTickets.ts     
+  TicketsApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      DefinitionBody:
+        openapi: "3.0.1"
+        info:
+          title: "Concert Tickets API"
+          version: "1.0"
+        paths:
+          /tickets:
+            get: 
+              summary: "Retrieves all the concert tickets"
+              responses:
+                "200":
+                  description:"A successful response"
+              x-amazon-apigateway-integration:
+                httpMethod: "POST"
+                type: "aws_proxy"
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${MyLambdaFunction.Arn}/invocations"
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -41,9 +128,27 @@ Outputs:
   TicketsApi:
     Description: "API Gateway endpoint URL for Prod stage for Tickets function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/tickets/"
-  TicketsFunction:
-    Description: "Tickets Lambda Function ARN"
+  GetTicketsFunction:
+    Description: "Get Tickets Lambda Function ARN"
     Value: !GetAtt GetTicketsFunction.Arn
-  TicketsFunctionIamRole:
-    Description: "Implicit IAM Role created for Tickets function"
+  GetTicketsFunctionIamRole:
+    Description: "Implicit IAM Role created for Get Tickets function"
     Value: !GetAtt GetTicketsFunctionRole.Arn
+  CreateTicketsFunction:
+    Description: "Create Tickets Lambda Function ARN"
+    Value: !GetAtt CreateTicketsFunction.Arn
+  CreateTicketsFunctionIamRole:
+    Description: "Implicit IAM Role created for Create Tickets function"
+    Value: !GetAtt CreateTicketsFunctionRole.Arn
+  UpdateTicketsFunction:
+    Description: " Update Tickets Lambda Function ARN"
+    Value: !GetAtt UpdateTicketsFunction.Arn
+  UpdateTicketsFunctionIamRole:
+    Description: "Implicit IAM Role created for Update Tickets function"
+    Value: !GetAtt UpdateTicketsFunctionRole.Arn
+  DeleteTicketsFunction:
+    Description: " Delete Tickets Lambda Function ARN"
+    Value: !GetAtt DeleteTicketsFunction.Arn
+  DeleteTicketsFunctionIamRole:
+    Description: "Implicit IAM Role created for Delete Tickets function"
+    Value: !GetAtt DeleteTicketsFunctionRole.Arn

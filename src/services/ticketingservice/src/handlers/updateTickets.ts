@@ -16,14 +16,18 @@ import { Context } from 'vm';
 export const handler = async (event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> => {
     try {
 
-        console.log(`Event: ${JSON.stringify(event, null, 2)}`);
-        console.log(`Context: ${JSON.stringify(context, null, 2)}`);
-          console.log('Remaining time: ', context.getRemainingTimeInMillis());
-    console.log('Function name: ', context.functionName);
-    console.log('Get Body:', event.body)
-    console.log(`Get Body Stringify: ${JSON.stringify(event.body, null, 2)}`);
-     const ticketResponse = {
-            ticketId:randomUUID(),
+        console.log(`Event`);
+        console.log(event);
+        console.log(`Context`);
+        console.log(context);
+
+        console.log('Remaining time: ', context.getRemainingTimeInMillis());
+        console.log('Function name: ', context.functionName);
+        console.log('Get Body:', event.body)
+    
+        const ticketId = event.pathParameters!.ticketId!;
+        const ticketResponse = {
+            ticketId:ticketId,
             concert: "Aerosmith Tour",
             concertDate: "Saturday November 21, 6:30 PM",
             seatNumber:"14",
@@ -36,7 +40,7 @@ export const handler = async (event: APIGatewayProxyEvent, context: Context): Pr
         }
 
         return {
-            statusCode: 201,
+            statusCode: 200,
             body: JSON.stringify(ticketResponse),
         };
     } catch (err) {
