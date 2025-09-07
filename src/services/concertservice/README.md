@@ -5,7 +5,7 @@ This is a sample template for concertservice - Below is a brief explanation of w
 ```bash
 .
 ├── README.md                   <-- This instructions file
-├── hello-world                 <-- Source code for a lambda function
+├── src                         <-- Source code for a lambda function
 │   ├── main.go                 <-- Lambda function code
 │   └── main_test.go            <-- Unit tests
 │   └── Dockerfile              <-- Dockerfile
@@ -36,17 +36,17 @@ Read more about [SAM Build here](https://docs.aws.amazon.com/serverless-applicat
 sam local start-api
 ```
 
-If the previous command ran successfully you should now be able to hit the following local endpoint to invoke your function `http://localhost:3000/hello`
+If the previous command ran successfully you should now be able to hit the following local endpoint to invoke your function `http://localhost:3000/concerts`
 
 **SAM CLI** is used to emulate both Lambda and API Gateway locally and uses our `template.yaml` to understand how to bootstrap this environment (runtime, where the source code is, etc.) - The following excerpt is what the CLI will read in order to initialize an API and its routes:
 
 ```yaml
 ...
 Events:
-    HelloWorld:
+    Concerts:
         Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
         Properties:
-            Path: /hello
+            Path: /concerts
             Method: get
 ```
 
@@ -84,7 +84,7 @@ You can find your API Gateway Endpoint URL in the output values displayed after 
 We use `testing` package that is built-in in Golang and you can simply run the following command to run our tests locally:
 
 ```shell
-cd ./hello-world/
+cd ./src/
 go test -v .
 ```
 # Appendix

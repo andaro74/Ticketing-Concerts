@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: 'concertservice
 
-  Sample SAM Template for concertservice
+  SAM Template for concertservice
 
   '
 Globals:
@@ -10,7 +10,7 @@ Globals:
     Timeout: 5
     MemorySize: 128
 Resources:
-  HelloWorldFunction:
+  ConcertsFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
@@ -20,31 +20,31 @@ Resources:
         CatchAll:
           Type: Api
           Properties:
-            Path: /hello
+            Path: /concerts
             Method: GET
       Environment:
         Variables:
           PARAM1: VALUE
-      ImageUri: helloworldfunction:provided.al2023-v1
+      ImageUri: concertsfunction:provided.al2023-v1
     Metadata:
-      DockerContext: C:\Users\andar\source\github\TicketingSolution\ticketing\src\services\concertservice\hello-world
+      DockerContext: C:\Users\andar\source\github\TicketingSolution\ticketing\src\services\concertservice\src
       DockerTag: provided.al2023-v1
       Dockerfile: Dockerfile
-      SamResourceId: HelloWorldFunction
+      SamResourceId: ConcertsFunction
 Outputs:
-  HelloWorldAPI:
+  ConcertsAPI:
     Description: API Gateway endpoint URL for Prod environment for First Function
     Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
-  HelloWorldFunction:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/concerts/
+  ConcertsFunction:
     Description: First Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - HelloWorldFunction
+      - ConcertsFunction
       - Arn
-  HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
+  ConcertsFunctionIamRole:
+    Description: Implicit IAM Role created for Concerts function
     Value:
       Fn::GetAtt:
-      - HelloWorldFunctionRole
+      - ConcertsFunctionRole
       - Arn

@@ -1,4 +1,4 @@
-module hello-world
+module concertservice
 
 go 1.19
 
