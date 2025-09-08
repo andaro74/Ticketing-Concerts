@@ -27,7 +27,10 @@ def lambda_handler(event, context):
         "statusCode": 200,
         "body": json.dumps(
             {
-                "message": "hello world",
+                "userId": "234234",
+                "firstName": "John",
+                "lastName": "Doe",
+                "email":"john.doe@gmail.com"
             }
         ),
     }
