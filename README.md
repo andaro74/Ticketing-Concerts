@@ -1,6 +1,12 @@
 # Concert Ticketing Microservices in AWS
 REST API Concert Ticketing Microservices Application in AWS to show a distributed architecture using API Gateway, Lambdas and DynamoDB.
 
+#### Microservices
+- Ticketing Service. Ticket service provider
+- Concert Service. Catalog of all the available concerts
+- Profile Service. Customer profile information to link tickets, concerts and profile together.
+
+
 #### Requirements
 - Docker
 - node v22
