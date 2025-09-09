@@ -1,10 +1,13 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
+	"log"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-lambda-go/lambdacontext"
 )
 
 type Concert struct {
@@ -13,7 +16,14 @@ type Concert struct {
 	Description string `json:"description"`
 }
 
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func handler(context context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+
+	lc, _ := lambdacontext.FromContext(context)
+	log.Print("Client Context")
+	log.Print(lc.ClientContext)
+
+	log.Print("Request")
+	log.Print(request)
 
 	var concert Concert
 
